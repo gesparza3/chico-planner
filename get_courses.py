@@ -17,7 +17,7 @@ elif sys.argv[1] in ['CINS', 'cins']:
     DEGREE_COLOR = 'blue'
 
 elif sys.argv[1] in ['EECE', 'eece']:
-    DEGREE_URL = 'https://catalog.csuchico.edu/viewer/13/ENGR/CMPENONEBS.html<Paste>'
+    DEGREE_URL = 'https://catalog.csuchico.edu/viewer/13/ENGR/CMPENONEBS.html'
     DEGREE = 'EECE'
     DEGREE_COLOR = 'green'
 
