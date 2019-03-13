@@ -15,6 +15,12 @@ elif sys.argv[1] in ['CINS', 'cins']:
     DEGREE_URL = 'http://catalog.csuchico.edu/viewer/18/CSCI/CINSNONEBS.html'
     DEGREE = 'CINS'
     DEGREE_COLOR = 'blue'
+
+elif sys.argv[1] in ['EECE', 'eece']:
+    DEGREE_URL = 'https://catalog.csuchico.edu/viewer/13/ENGR/CMPENONEBS.html<Paste>'
+    DEGREE = 'EECE'
+    DEGREE_COLOR = 'green'
+
 else:
     print("YIKES")
     sys.exit()

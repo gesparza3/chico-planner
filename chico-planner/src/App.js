@@ -26,6 +26,7 @@ class App extends Component {
         onChange={this.degreeChanged}>
         <label><Checkbox value="CSCI"/> CSCI </label>
         <label><Checkbox value="CINS"/> CINS</label>
+        <label><Checkbox value="EECE"/> EECE</label>
       </CheckboxGroup>
       </div>
     );
