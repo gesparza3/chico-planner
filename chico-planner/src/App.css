@@ -1,0 +1,42 @@
+.App {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.App-header {
+  background-color: #8C2332;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+div.custom-container {
+  background-color: #FFFFFF;
+}
+
+svg.custom .node circle {
+  fill: #F3F3FF;
+  stroke: #2593B8;
+  stroke-width: 1.5px;
+}
+
+svg.custom .node text {
+  font-size: 11px;
+  background-color: #444;
+  fill: #F4F4F4;
+  text-shadow: 0 1px 4px black;
+}
+
+svg.custom .node {
+  cursor: pointer;
+}
+
+svg.custom path.link {
+  fill: none;
+  stroke: #2593B8;
+  stroke-width: 1.5px;
+}
