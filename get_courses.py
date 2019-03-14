@@ -25,7 +25,6 @@ else:
     print("YIKES")
     sys.exit()
 
-
 # query website and return the html to the variable 'page'
 DEGREE_PAGE = requests.get(DEGREE_URL)
 
