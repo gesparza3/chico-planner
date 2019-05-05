@@ -17,34 +17,36 @@ class CourseMap extends React.Component {
     // eslint-disable-next-line
     const div = new ReactFauxDOM.createElement('div');
 
-    const dagData = [
-        ['ECON 103', 'FINA 307'],
-        ['CSCI 111', 'CSCI 217'],
-        ['CSCI 111', 'CSCI 211'],
-        ['CSCI 111', 'MATH 217'],
-        ['CSCI 111', 'CINS 242'],
-        ['ACCT 201', 'ACCT 202'],
-        ['ACCT 201', 'FINA 307'],
-        ['CSCI 211', 'CSCI 446'],
-        ['CSCI 211', 'CSCI 344'],
-        ['CSCI 211', 'CSCI 311'],
-        ['CSCI 211', 'CSCI 444'],
-        ['CSCI 211', 'CINS 370'],
-        ['CSCI 217', 'CSCI 311'],
-        ['MATH 217', 'CSCI 311'],
-        ['CINS 220', 'CSCI 446'],
-        ['CSCI 311', 'CINS 490'],
-        ['CSCI 311', 'CSCI 515'],
-        ['CSCI 311', 'CSCI 340'],
-        ['CINS 370', 'CINS 570'],
-        ['CINS 370', 'CINS 574'],
-        ['CINS 370', 'CINS 465'],
-        ['CSCI 446', 'CSCI 546'],
-        ['CSCI 446', 'EECE 555'],
-        ['CSCI 446', 'CINS 448'],
-        ['CINS 448', 'CINS 548'],
-      ];
+    // const dagData = [
+    //     ['ECON 103', 'FINA 307'],
+    //     ['CSCI 111', 'CSCI 217'],
+    //     ['CSCI 111', 'CSCI 211'],
+    //     ['CSCI 111', 'MATH 217'],
+    //     ['CSCI 111', 'CINS 242'],
+    //     ['ACCT 201', 'ACCT 202'],
+    //     ['ACCT 201', 'FINA 307'],
+    //     ['CSCI 211', 'CSCI 446'],
+    //     ['CSCI 211', 'CSCI 344'],
+    //     ['CSCI 211', 'CSCI 311'],
+    //     ['CSCI 211', 'CSCI 444'],
+    //     ['CSCI 211', 'CINS 370'],
+    //     ['CSCI 217', 'CSCI 311'],
+    //     ['MATH 217', 'CSCI 311'],
+    //     ['CINS 220', 'CSCI 446'],
+    //     ['CSCI 311', 'CINS 490'],
+    //     ['CSCI 311', 'CSCI 515'],
+    //     ['CSCI 311', 'CSCI 340'],
+    //     ['CINS 370', 'CINS 570'],
+    //     ['CINS 370', 'CINS 574'],
+    //     ['CINS 370', 'CINS 465'],
+    //     ['CSCI 446', 'CSCI 546'],
+    //     ['CSCI 446', 'EECE 555'],
+    //     ['CSCI 446', 'CINS 448'],
+    //     ['CINS 448', 'CINS 548'],
+    //   ];
 
+    // const dagData = require(('../data/' + this.props.data + '_pre.json'))
+    const dagData = require('../data/CSCI_pre.json')
 
     // Define margin
     const margin = {top: 80, right: 80, bottom: 50, left: 80};

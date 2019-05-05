@@ -88,10 +88,10 @@ with open(DEGREE + '.json', 'w') as outfile:
 COURSE_LINKS = []
 for course in COURSE_TITLE:
     for prereq in COURSE_CHILDREN[course]:
-        COURSE_LINKS.append({
-            'source' : str(course),
-            'target' : str(prereq)
-            })
+        COURSE_LINKS.append([
+            str(course),
+            str(prereq)
+            ])
 #
 #  print(COURSE_LINKS)
 with open(DEGREE + '_pre.json', 'w') as outfile:
