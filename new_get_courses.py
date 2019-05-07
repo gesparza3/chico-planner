@@ -6,6 +6,19 @@ import requests
 from bs4 import BeautifulSoup
 import networkx as nx
 
+
+class Graph:
+    def __init__(self):
+        self.edges = []
+
+    def addEdge(self, link):
+        self.edges.append(link)
+
+    def printGraph(self):
+        for link in self.edges:
+            print(link)
+
+
 class Course:
     "Courses and their attributes"
     def __init__(self, name):
@@ -22,6 +35,7 @@ class Course:
     def printCourse(self):
         print(self.name)
         print(self.prereqs)
+
 
 def getDegreeUrl(degree):
 
@@ -112,12 +126,34 @@ def generateEdges(myset):
     course_links = []
     for c in myset:
         for r in c.children:
-            course_links.append([
+            course_links.append((
                 str(c.name),
                 str(r)
-                ])
+                ))
     return course_links
 
+
+def groupGraphs(links, connected_components):
+    graphs = []
+    for c in range(0, len(connected_components)):
+        graphs.append(Graph())
+
+    iters = 0
+    for link in links:
+        for component in connected_components:
+            if set(link).issubset(set(component)):
+                graphs[iters].addEdge(list(link))
+            iters += 1
+        iters = 0
+    return graphs
+
+
+def writeToFile(mygraphs):
+    iters = 1
+    for g in mygraphs:
+        with open('graph_' + str(iters) + '.json', 'w') as outfile:
+            json.dump(g.edges, outfile)
+        iters += 1
 
 def main():
     deg_url = getDegreeUrl(sys.argv[1])
@@ -127,7 +163,9 @@ def main():
     # findUniqueGraphs(myset)
     links = generateEdges(myset)
     graph = nx.Graph(links)
-    print([tuple(c) for c in nx.connected_components(graph)])
+    cc = [tuple(c) for c in nx.connected_components(graph)]
+    mygraphs = groupGraphs(links, cc)
+    writeToFile(mygraphs)
 
 if __name__ == '__main__':
     main()
