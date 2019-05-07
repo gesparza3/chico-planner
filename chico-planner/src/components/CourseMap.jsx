@@ -9,31 +9,43 @@ const d3 = Object.assign({}, D3, d3Dag);
 let node_list = []
 
 /**
- * FrequencyChart test
+ * Visualize classes with a DAG
  */
 class CourseMap extends React.Component {
+  /**
+   * Set state values
+   */
   constructor(props) {
-      super(props);
-      this.state = {
-        mouseOver: false
-      };
-    }
+    super(props);
+    this.state = {
+      mouseOver: false
+    };
+  } // constructor
 
+  /**
+   * Course objects contain info about the course and its children
+   */
   Course(id, description) {
     this.id = id;
     this.description = description;
     this.children = [];
 
+    /**
+     * Add a list of course names as course's children
+     */
     this.addChildren = function (list) {
       for(var i = 0; i < list.length; i++) {
         this.children[i] = list[i];
       }
     }
 
+    /**
+     * Return the name of the course
+     */
     this.getId = function () {
       return this.id;
     }
-  }
+  } // Course
 
   intializeCourses = function (data) {
     for(var n in data) {
@@ -69,7 +81,7 @@ class CourseMap extends React.Component {
     d3.sugiyama().decross(d3.decrossTwoLayer())(dag);
 
     // This code only handles rendering
-    const nodeRadius = 20;
+    // const nodeRadius = 20;
 
     // Define svg
     const svgSelection = d3.select(div).append('svg')

@@ -1,7 +1,0 @@
-- Focus on bottleneck courses
-  - CSCI 217
-  - "How can a student plan for an unavailable class? What should he/she
-  take?
-- Minor/Certificates
-- Reccommended "best path" to soonest graduation date
-  - How will missing a class affect when you graduate
