@@ -4,7 +4,7 @@ services:
       container_name: react
       build: ./chico-planner
       volumes:
-        - ./chico_planner/:/usr/src/app/
+        - ./chico-planner/:/usr/src/app/
       ports:
         - '3000:3000'
-      command: [ "npm", "start" ]
+      command: [ "yarn", "start" ]

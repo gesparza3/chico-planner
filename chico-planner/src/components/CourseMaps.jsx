@@ -5,6 +5,9 @@ const D3 = require('d3');
 const d3Dag = require('d3-dag');
 const d3 = Object.assign({}, D3, d3Dag);
 
+
+let node_list = []
+
 /**
  * FrequencyChart test
  */
@@ -15,6 +18,31 @@ class CourseMap extends React.Component {
         mouseOver: false
       };
     }
+
+  Course(id, description) {
+    this.id = id;
+    this.description = description;
+    this.children = [];
+
+    this.addChildren = function (list) {
+      for(var i = 0; i < list.length; i++) {
+        this.children[i] = list[i];
+      }
+    }
+
+    this.getId = function () {
+      return this.id;
+    }
+  }
+
+  intializeCourses = function (data) {
+    for(var n in data) {
+      var newCourse = new this.Course(n, data[n]['desc'])
+      newCourse.addChildren(data[n]['children'])
+      node_list.push(newCourse);
+    }
+  }
+
   /**
    * Draws frequency chart
    * @return {graph} returns graph object
@@ -22,6 +50,10 @@ class CourseMap extends React.Component {
   drawChart() {
     // eslint-disable-next-line
     const div = new ReactFauxDOM.createElement('div');
+
+    const node_info = require('../data/node_data.json');
+    this.intializeCourses(node_info);
+    console.log(node_list[0])
 
     // const dagData = require(('../data/' + this.props.data + '_pre.json'))
     const dagData = this.props.data

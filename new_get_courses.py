@@ -21,10 +21,11 @@ class Graph:
 
 class Course:
     "Courses and their attributes"
-    def __init__(self, name):
+    def __init__(self, name, desc):
         self.name = name
         self.prereqs = set()
         self.children = set()
+        self.description = desc
 
     def addPreReqs(self, p):
         self.prereqs = p
@@ -70,13 +71,14 @@ def scrapeInfo(url):
             if "coursePrereq" in str(course.find_next('span').get('class')):
                 desc = course.find_next('span').text
                 pre_reqs = set(re.findall(r'[A-Z]{4} \d{3}\w?', str(desc)))
-                new_course = Course(course_name)
+                new_course = Course(course_name, desc)
                 new_course.addPreReqs(pre_reqs)
                 course_list.add(new_course)
 
             else:
-               # print("NA")
-               course_list.add(Course(course_name))
+                desc = course.find_next('span').text
+                course_list.add(Course(course_name, desc))
+
     return course_list
 
 
@@ -88,7 +90,7 @@ def addNonListedCourses(myset):
         missing_classes.update(difference)
 
     for m in missing_classes:
-        myset.add(Course(m))
+        myset.add(Course(m, "Missing desc"))
 
 
 def addChildren(myset):
@@ -159,10 +161,21 @@ def generateAdjList(myset):
 def writeToFile(mygraphs):
     iters = 1
     for g in mygraphs:
-        print("HI")
         with open('graph_' + str(iters) + '.json', 'w') as outfile:
             json.dump(g.edges, outfile)
         iters += 1
+
+
+def createNodeData(myset):
+    node_data = {}
+    for c in myset:
+        node_data[c.name] = {
+            "desc": c.description,
+            "children": list(c.children)
+        }
+    with open('node_data.json', 'w') as outfile:
+            json.dump(node_data, outfile)
+
 
 def main():
     deg_url = getDegreeUrl(sys.argv[1])
@@ -175,6 +188,7 @@ def main():
     mygraphs = groupGraphs(links, cc)
     writeToFile(mygraphs)
     generateAdjList(myset)
+    createNodeData(myset)
 
 if __name__ == '__main__':
     main()
