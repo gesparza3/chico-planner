@@ -142,15 +142,24 @@ def groupGraphs(links, connected_components):
     for link in links:
         for component in connected_components:
             if set(link).issubset(set(component)):
-                graphs[iters].addEdge(list(link))
+                graphs[iters].addEdge([x.replace(' ', '') for x in list(link)])
             iters += 1
         iters = 0
     return graphs
 
 
+def generateAdjList(myset):
+    adj_list = {}
+    for c in myset:
+        adj_list[c.name.replace(' ', '')] = list([x.replace(' ', '') for x in c.children])
+    with open('adj.json', 'w') as outfile:
+        json.dump(adj_list, outfile)
+
+
 def writeToFile(mygraphs):
     iters = 1
     for g in mygraphs:
+        print("HI")
         with open('graph_' + str(iters) + '.json', 'w') as outfile:
             json.dump(g.edges, outfile)
         iters += 1
@@ -160,12 +169,12 @@ def main():
     myset = scrapeInfo(deg_url)
     addNonListedCourses(myset)
     addChildren(myset)
-    # findUniqueGraphs(myset)
     links = generateEdges(myset)
     graph = nx.Graph(links)
     cc = [tuple(c) for c in nx.connected_components(graph)]
     mygraphs = groupGraphs(links, cc)
     writeToFile(mygraphs)
+    generateAdjList(myset)
 
 if __name__ == '__main__':
     main()

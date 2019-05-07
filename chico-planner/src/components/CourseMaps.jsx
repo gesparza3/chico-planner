@@ -9,6 +9,12 @@ const d3 = Object.assign({}, D3, d3Dag);
  * FrequencyChart test
  */
 class CourseMap extends React.Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        mouseOver: false
+      };
+    }
   /**
    * Draws frequency chart
    * @return {graph} returns graph object
@@ -17,36 +23,9 @@ class CourseMap extends React.Component {
     // eslint-disable-next-line
     const div = new ReactFauxDOM.createElement('div');
 
-    // const dagData = [
-    //     ['ECON 103', 'FINA 307'],
-    //     ['CSCI 111', 'CSCI 217'],
-    //     ['CSCI 111', 'CSCI 211'],
-    //     ['CSCI 111', 'MATH 217'],
-    //     ['CSCI 111', 'CINS 242'],
-    //     ['ACCT 201', 'ACCT 202'],
-    //     ['ACCT 201', 'FINA 307'],
-    //     ['CSCI 211', 'CSCI 446'],
-    //     ['CSCI 211', 'CSCI 344'],
-    //     ['CSCI 211', 'CSCI 311'],
-    //     ['CSCI 211', 'CSCI 444'],
-    //     ['CSCI 211', 'CINS 370'],
-    //     ['CSCI 217', 'CSCI 311'],
-    //     ['MATH 217', 'CSCI 311'],
-    //     ['CINS 220', 'CSCI 446'],
-    //     ['CSCI 311', 'CINS 490'],
-    //     ['CSCI 311', 'CSCI 515'],
-    //     ['CSCI 311', 'CSCI 340'],
-    //     ['CINS 370', 'CINS 570'],
-    //     ['CINS 370', 'CINS 574'],
-    //     ['CINS 370', 'CINS 465'],
-    //     ['CSCI 446', 'CSCI 546'],
-    //     ['CSCI 446', 'EECE 555'],
-    //     ['CSCI 446', 'CINS 448'],
-    //     ['CINS 448', 'CINS 548'],
-    //   ];
-
     // const dagData = require(('../data/' + this.props.data + '_pre.json'))
-    const dagData = require('../data/CSCI_pre.json')
+    const dagData = this.props.data
+    const adjList = require('../data/adj.json')
 
     // Define margin
     const margin = {top: 80, right: 80, bottom: 50, left: 80};
@@ -55,7 +34,7 @@ class CourseMap extends React.Component {
 
     const dag = d3.dagConnect()(dagData);
 
-    d3.sugiyama()(dag);
+    d3.sugiyama().decross(d3.decrossTwoLayer())(dag);
 
     // This code only handles rendering
     const nodeRadius = 20;
@@ -104,7 +83,19 @@ class CourseMap extends React.Component {
     // Plot node circles
     nodes.append('circle')
         .attr('r', 40)
-        .attr('fill', (n) => colorMap[n.id]);
+        .attr('id', (d) => d.id)
+        .attr('fill', this.state.mouseOver ? 'red' : 'blue')
+        .on('click', function() {
+          var n;
+          var cur_node = d3.select(this).attr('id')
+          for (n in adjList[cur_node]) {
+            d3.selectAll("#" + adjList[cur_node][n])
+              .attr('fill', 'red')
+          }
+          // this.setState({
+            // mouseOver: !this.state.mouseOver
+          // })
+        })
 
     // Add text to nodes
     nodes.append('text')

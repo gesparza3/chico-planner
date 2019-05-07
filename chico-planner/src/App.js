@@ -3,6 +3,10 @@ import './App.css';
 import CourseMap from './components/CourseMaps';
 import { Checkbox, CheckboxGroup } from 'react-checkbox-group';
 
+const firstGraph = require('./data/graph_1.json');
+const secondGraph = require('./data/graph_2.json');
+
+
 class App extends Component {
 
   constructor(props) {
@@ -10,19 +14,23 @@ class App extends Component {
     this.state = {
       width: 2000,
       height: 1000,
-      degree: ['CSCI']
     };
   }
 
   render() {
     return (
       <div className="App">
-        <div className="App-header"><h1>Chico Planner</h1></div>
+        <div className="App-header"><h2>Chico Planner</h2></div>
         <div className="container">
           <CourseMap
             width={this.state.width}
             height={this.state.height}
-            data={this.state.degree}
+            data={firstGraph}
+          />
+          <CourseMap
+            width={this.state.width}
+            height={this.state.height}
+            data={secondGraph}
           />
         </div>
         <CheckboxGroup
