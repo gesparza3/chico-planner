@@ -1,70 +1,73 @@
 .App {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
+	text-align: center;
 }
 
 .App-header {
-  background-color: #8C2332;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #2C2A29;
+	color: #960000;
+	min-height: 10vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	font-weight: bold;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	text-shadow: #303030 1px 0 20px;
+}
+
+.h3 {
+	text-align: center;
 }
 
 .container-left {
-  float: left;
-  width: 70%;
+	float: left;
+	width: 70%;
 }
 
 .container-right {
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* float: right; */
+	min-height: 10vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.division_container {
+	display: flex;
+	margin: 5em;
 }
 
 .division {
-  display: inline-block;
-  width: 49%;
+	box-sizing: border-box;
+	width: 49%;
+	margin: 1em;
 }
 
-
 .degreeProgress {
-  border: thin solid black;
+	color: white;
+	font-weight: bold;
+	font-size: 1.25em;
+	background-color: #2C2A29;
+	border: thin solid black;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	text-align: center;
 }
 
 .degreeProgressHeader {
-  background-color: #d3d3d3;
-  border: thin solid black;
+	background-color: #960000;
+	color: white;
+	border-top-right-radius: 1em;
+	border-top-left-radius: 1em;
+	border: thin solid black;
 }
+
 div.custom-container {
-  background-color: #FFFFFF;
+	background-color: #FFFFFF;
 }
 
 svg.custom .node circle {
-  fill: #F3F3FF;
-  stroke: #2593B8;
-  stroke-width: 1.5px;
-}
-
-svg.custom .node text {
-  font-size: 11px;
-  background-color: #444;
-  fill: #F4F4F4;
-  text-shadow: 0 1px 4px black;
-}
-
-svg.custom .node {
-  cursor: pointer;
-}
-
-svg.custom path.link {
-  fill: none;
-  stroke: #2593B8;
-  stroke-width: 1.5px;
+	fill: #F3F3FF;
+	stroke: #2593B8;
+	stroke-width: 1.5px;
 }

@@ -10,6 +10,9 @@ const nodeInfo = require('../data/node_data.json');
 
 const d3 = Object.assign({}, D3, d3Dag);
 
+// Set node colors
+const node_undiscovered = '#2C2A29';
+const node_discovered = '#006BA6';
 
 /**
  * Visualize classes with a DAG
@@ -49,7 +52,7 @@ class CourseMap extends React.Component {
     const diff = parents.filter(x => !parent_options.includes(x));
     for (let i = 0; i < diff.length; i += 1) {
       const parentCourse = this.courses.get(diff[i])
-      if (parentCourse.color === 'gray') {
+      if (parentCourse.color === node_undiscovered) {
         return false;
       }
     }
@@ -57,7 +60,7 @@ class CourseMap extends React.Component {
     if (parent_options.length === 0) return true;
       for (let i = 0; i < parent_options.length; i += 1) {
         const parentCourse = this.courses.get(parent_options[i]);
-        if (parentCourse.color !== 'gray') {
+        if (parentCourse.color !== node_undiscovered) {
           return true;
         }
       }
@@ -99,7 +102,9 @@ class CourseMap extends React.Component {
 
 
     // Define SVG attributes
-    const svgSelection = d3.select(div).append('svg')
+    const svgSelection = d3.select(div)
+      .attr('class', 'container')
+      .append('svg')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
@@ -129,7 +134,7 @@ class CourseMap extends React.Component {
       .attr('id', ({ source, target }) => source.id.concat(target.id))
       .attr('fill', 'none')
       .attr('stroke-width', 2)
-      .attr('stroke', 'gray');
+      .attr('stroke', node_undiscovered);
 
     // Select nodes
     const nodes = svgSelection.append('g')
@@ -143,7 +148,7 @@ class CourseMap extends React.Component {
     nodes.append('circle')
       .attr('r', 38)
       .attr('id', d => d.id)
-      .attr('fill', 'gray')
+      .attr('fill', node_undiscovered)
       .on('click', (d) => {
         // Get current node
         const curCourse = this.getCourse(d.id);
@@ -157,7 +162,7 @@ class CourseMap extends React.Component {
 
           // Update units
           const unitVal = curCourse.units;
-          if (curCourse.color === 'gray') {
+          if (curCourse.color === node_undiscovered) {
             this.props.updateUnits(-unitVal);
           } else {
             this.props.updateUnits(unitVal);
@@ -167,14 +172,14 @@ class CourseMap extends React.Component {
 
 
           // Toggle stroke-width
-          const strokeWidth = curCourse.color === 'gray' ? 2 : 8;
+          const strokeWidth = curCourse.color === node_undiscovered ? 2 : 8;
           // Turn clicked node green
           d3.select('#'.concat(d.id))
             .attr('fill', curCourse.color);
 
           // Activate child and path to child
           mychilds.forEach((course) => {
-            const childColor = this.isEligble(course) ? 'blue' : 'gray';
+            const childColor = this.isEligble(course) ? node_discovered : node_undiscovered;
 
             d3.select('#'.concat(course)) // Child
               .attr('fill', childColor);
@@ -195,7 +200,6 @@ class CourseMap extends React.Component {
         );
       })
       .on('mouseout', (d) => {
-        const curCourse = this.getCourse(d.id);
         this.props.updateCourseDesc('Hover on a course to learn more');
       });
 
@@ -203,6 +207,7 @@ class CourseMap extends React.Component {
     nodes.append('text')
       .text(d => d.id)
       .attr('font-weight', 'bold')
+      .attr('class', 'shadow')
       .attr('font-family', 'sans-serif')
       .attr('text-anchor', 'middle')
       .attr('alignment-baseline', 'middle')
@@ -227,7 +232,7 @@ CourseMap.propTypes = {
   width: PropTypes.number.isRequired,
   dagData: PropTypes.instanceOf(Object).isRequired,
   updateCourseDesc: PropTypes.func.isRequired,
-  updateUnits: PropTypes.number.isRequired,
+  updateUnits: PropTypes.func.isRequired,
   addActiveCourses: PropTypes.func.isRequired,
 };
 

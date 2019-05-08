@@ -1,24 +1,35 @@
 @import url("css/normalize.css");
 /* @import url("css/sakura-dark.css"); */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  background-color: #B1B3B3;
+	margin: 5;
+	padding: 5;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .description {
-  background-color: #99ff99;
+  background-color: #960000;
+	color: white;
   display: block;
   width: 35em;
   height: 25em;
   padding: 1em;
+	border-radius: 2em;
   /* margin: auto; */
   margin-top: 1em;
   overflow-x: auto;
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
+
+text.shadow {
+    stroke: black;
+    stroke-width: .1px;
+    opacity: 0.9;
+}
+
+.container { display: flex; justify-content: center; }

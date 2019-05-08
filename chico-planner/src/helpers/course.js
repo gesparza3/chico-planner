@@ -1,13 +1,19 @@
+// Set node colors
+const node_undiscovered = '#2C2A29';
+const node_selected = '#0B6623';
+
 /**
  * Defines courses and their attributes
  */
 export default class Course {
+
+
   /**
    * Set intial course values
    */
   constructor(id, description, units) {
     this.id = id;
-    this.color = 'gray';
+    this.color = node_undiscovered;
     this.units = parseInt(units, 10);
     this.description = description;
     this.parents = [];
@@ -84,10 +90,10 @@ export default class Course {
    * Toggle color as a parent node
    */
   toggleAsParent() {
-    if (this.color === 'gray') {
-      this.color = 'green';
+    if (this.color === node_undiscovered) {
+      this.color = node_selected;
     } else {
-      this.color = 'gray';
+      this.color = node_undiscovered;
     }
   }
 
@@ -95,10 +101,10 @@ export default class Course {
    * Toggle color as a child node
    */
   toggleAsChild() {
-    if (this.color === 'gray') {
+    if (this.color === node_undiscovered) {
       this.color = 'blue';
     } else {
-      this.color = 'gray';
+      this.color = node_undiscovered;
     }
   }
 } // Course

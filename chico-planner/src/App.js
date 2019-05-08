@@ -43,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header"><h2>Chico Planner</h2></div>
+        <div className="App-header"><h2>CSCI Course Explorer</h2></div>
         <div className="container-left">
           <CourseMap
             width={this.state.width}
@@ -55,7 +55,7 @@ class App extends Component {
           />
           <CourseMap
             width={800}
-            height={100}
+            height={250}
             dagData={secondGraph}
             updateCourseDesc={this.updateCourseDescription}
             updateUnits={this.updateUnits}
