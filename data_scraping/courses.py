@@ -21,21 +21,28 @@ class Graph:
 
 class Course:
     "Courses and their attributes"
-    def __init__(self, name, desc):
+    def __init__(self, name, desc, units):
         self.name = name
         self.prereqs = set()
+        self.prereqOptions = set()
         self.children = set()
         self.description = desc
+        self.units = units
 
     def addPreReqs(self, p):
         self.prereqs = p
+
+    def addPreReqOptions(self, p):
+        self.prereqOptions = p
 
     def addChild(self, c):
         self.children.add(c)
 
     def printCourse(self):
         print(self.name)
+        print(self.description)
         print(self.prereqs)
+        print(self.units)
 
 
 def getDegreeUrl(degree):
@@ -66,18 +73,22 @@ def scrapeInfo(url):
     # Take ut the <div> of the name and get its value
     for course in soup.find_all('tr'):
         if course.get('class') is not None:
-            # print course.contents[0].text.strip() ,
             course_name = course.contents[0].text.strip()
+            course_units = course.find_next('td', attrs={'class':'courseUnits'}).text.strip()
             if "coursePrereq" in str(course.find_next('span').get('class')):
-                desc = course.find_next('span').text
-                pre_reqs = set(re.findall(r'[A-Z]{4} \d{3}\w?', str(desc)))
-                new_course = Course(course_name, desc)
+                p_block = course.find_next('span').text
+                desc = course.find_next('span', attrs={'class':'courseDescr'}).text
+                pre_reqs = set(re.findall(r'[A-Z]{4} \d{3}\w?', str(p_block)))
+                pre_req_options_pre = re.findall(r'([A-Z]{4} \d{3}\w?)\sor', str(p_block))
+                pre_req_options_post = re.findall(r'or\s([A-Z]{4} \d{3}\w?)', str(p_block))
+                pre_req_options = set(pre_req_options_pre).union(pre_req_options_post)
+                new_course = Course(course_name, desc, course_units)
                 new_course.addPreReqs(pre_reqs)
+                new_course.addPreReqOptions(pre_req_options)
                 course_list.add(new_course)
 
             else:
-                desc = course.find_next('span').text
-                course_list.add(Course(course_name, desc))
+                course_list.add(Course(course_name, desc, course_units))
 
     return course_list
 
@@ -90,7 +101,7 @@ def addNonListedCourses(myset):
         missing_classes.update(difference)
 
     for m in missing_classes:
-        myset.add(Course(m, "Missing desc"))
+        myset.add(Course(m, "Missing desc", 'Missing units'))
 
 
 def addChildren(myset):
@@ -169,9 +180,12 @@ def writeToFile(mygraphs):
 def createNodeData(myset):
     node_data = {}
     for c in myset:
-        node_data[c.name] = {
+        node_data[c.name.replace(' ', '')] = {
             "desc": c.description,
-            "children": list(c.children)
+            "parents": [x.replace(' ', '') for x in list(c.prereqs)],
+            "parent_options": [x.replace(' ', '') for x in list(c.prereqOptions)],
+            "children": [x.replace(' ', '') for x in list(c.children)],
+            "units": c.units
         }
     with open('node_data.json', 'w') as outfile:
             json.dump(node_data, outfile)

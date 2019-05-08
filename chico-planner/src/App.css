@@ -14,6 +14,34 @@
   color: white;
 }
 
+.container-left {
+  float: left;
+  width: 70%;
+}
+
+.container-right {
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* float: right; */
+}
+
+.division {
+  display: inline-block;
+  width: 49%;
+}
+
+
+.degreeProgress {
+  border: thin solid black;
+}
+
+.degreeProgressHeader {
+  background-color: #d3d3d3;
+  border: thin solid black;
+}
 div.custom-container {
   background-color: #FFFFFF;
 }

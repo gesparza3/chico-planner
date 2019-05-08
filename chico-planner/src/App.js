@@ -1,55 +1,74 @@
 import React, { Component } from 'react';
 import './App.css';
-import CourseMap from './components/CourseMaps';
-import { Checkbox, CheckboxGroup } from 'react-checkbox-group';
+import CourseMap from './components/CourseMap';
+import DegreeProgress from './components/DegreeProgess';
 
 const firstGraph = require('./data/graph_1.json');
 const secondGraph = require('./data/graph_2.json');
 
 
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      width: 2000,
-      height: 1000,
+      width: 1500,
+      height: 900,
+      courseDesc: 'Hover on a course to learn more',
+      units: 0,
+      activeCourses: new Map(),
     };
+    this.updateCourseDescription = this.updateCourseDescription.bind(this);
+    this.updateUnits = this.updateUnits.bind(this);
+    this.addActiveCourses = this.addActiveCourses.bind(this);
+  }
+
+  updateCourseDescription(desc) {
+    this.setState({
+      courseDesc: desc,
+    });
+  }
+
+  updateUnits(num) {
+    this.setState(prevState => ({
+      units: prevState.units + num,
+    }));
+  }
+
+  addActiveCourses(map) {
+    this.setState({
+      activeCourses: map,
+    });
   }
 
   render() {
     return (
       <div className="App">
         <div className="App-header"><h2>Chico Planner</h2></div>
-        <div className="container">
+        <div className="container-left">
           <CourseMap
             width={this.state.width}
             height={this.state.height}
-            data={firstGraph}
+            dagData={firstGraph}
+            updateCourseDesc={this.updateCourseDescription}
+            updateUnits={this.updateUnits}
+            addActiveCourses={this.addActiveCourses}
           />
           <CourseMap
-            width={this.state.width}
-            height={this.state.height}
-            data={secondGraph}
+            width={800}
+            height={100}
+            dagData={secondGraph}
+            updateCourseDesc={this.updateCourseDescription}
+            updateUnits={this.updateUnits}
+            addActiveCourses={this.addActiveCourses}
           />
         </div>
-        <CheckboxGroup
-           checkboxDepth={2} // This is needed to optimize the checkbox group
-           name="degree"
-           value={this.state.degree}
-           onChange={this.degreeChanged}>
-           <label><Checkbox value="CSCI"/> CSCI </label>
-           <label><Checkbox value="CINS"/> CINS</label>
-           <label><Checkbox value="EECE"/> EECE</label>
-        </CheckboxGroup>
+        <div className="container-right">
+          <div className="description"><h3>{this.state.courseDesc}</h3></div>
+          <h1>Total Units: {this.state.units}/87</h1>
+          <DegreeProgress courses={this.state.activeCourses} />
+        </div>
       </div>
     );
-  }
-
-  degreeChanged = (newDegrees) => {
-    this.setState({
-      degree: newDegrees
-    });
   }
 }
 

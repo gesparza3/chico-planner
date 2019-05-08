@@ -1,0 +1,44 @@
+{
+  "lower_division_required": {
+    "courses": [
+      "CSCI111",
+      "CSCI211",
+      "EECE237",
+      "MATH120",
+      "MATH121"
+    ]
+  },
+  "lower_division_pick1": {
+    "courses": [
+      "CSCI217",
+      "MATH217"
+      ]
+  },
+  "lower_division_pick2": {
+    "courses": [
+      "CHEM111",
+      "CHEM112",
+      "PHYS204A",
+      "PHYS204B"
+    ]
+  },
+  "upper_division": {
+    "courses": [
+      "CINS370",
+      "CINS448",
+      "CINS465",
+      "CSCI301W",
+      "CSCI311",
+      "CSCI340",
+      "CSCI430",
+      "CSCI446",
+      "CSCI490",
+      "CSCI515",
+      "CSCI550",
+      "CSCI551",
+      "CSCI580",
+      "EECE320",
+      "MATH314"
+    ]
+  }
+}
