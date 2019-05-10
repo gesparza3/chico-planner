@@ -11,11 +11,11 @@ class CourseList extends React.Component {
 		});
     }
     return (
-      <ul>
+      <div>
         {this.props.courseList.map((name, index) => {
           return <h3 style={{backgroundColor: courseInfo[index]}} key={ index }>{name}</h3>
         })}
-      </ul>
+      </div>
     );
   }
 }

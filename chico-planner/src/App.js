@@ -11,8 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      width: 1500,
-      height: 900,
+      width: 1800,
+      height: 1000,
       courseDesc: 'Hover on a course to learn more',
       units: 0,
       activeCourses: new Map(),

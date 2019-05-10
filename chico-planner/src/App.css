@@ -8,6 +8,7 @@
 	min-height: 10vh;
 	display: flex;
 	flex-direction: column;
+  width: 80em;
 	align-items: center;
 	justify-content: center;
 	font-size: calc(10px + 2vmin);
@@ -35,13 +36,25 @@
 
 .division_container {
 	display: flex;
-	margin: 5em;
+	margin: 1em;
 }
 
 .division {
 	box-sizing: border-box;
 	width: 49%;
 	margin: 1em;
+}
+
+.degreeProgress-left {
+	color: white;
+  float:left;
+  width: 33%;
+	font-weight: bold;
+	font-size: 1.25em;
+	background-color: #2C2A29;
+	border: thin solid black;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	text-align: center;
 }
 
 .degreeProgress {
@@ -54,9 +67,39 @@
 	text-align: center;
 }
 
+.degree-container {
+  display: flex;
+}
+
+.degreeProgress-middle {
+	color: white;
+  float: left;
+  width: 33%;
+  min-height: 100%;
+	font-weight: bold;
+	font-size: 1.25em;
+	background-color: #2C2A29;
+	border: thin solid black;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	text-align: center;
+}
+
+.degreeProgress-right {
+	color: white;
+  float:right;
+  width: 33%;
+	font-weight: bold;
+	font-size: 1.25em;
+	background-color: #2C2A29;
+	border: thin solid black;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	text-align: center;
+}
+
 .degreeProgressHeader {
 	background-color: #960000;
 	color: white;
+  width: 30em;
 	border-top-right-radius: 1em;
 	border-top-left-radius: 1em;
 	border: thin solid black;

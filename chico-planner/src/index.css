@@ -4,6 +4,7 @@ body {
   background-color: #B1B3B3;
 	margin: 5;
 	padding: 5;
+  height: 100%;
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
   -webkit-font-smoothing: antialiased;
